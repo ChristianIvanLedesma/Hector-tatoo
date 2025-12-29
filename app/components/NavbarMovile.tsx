@@ -1,5 +1,6 @@
 import { navbar } from "./Navbar0PantallaGrande";
 import { Menu, X } from "lucide-react";
+import Link from 'next/link'
 
 interface Props {
   toggleMenu: () => void;
@@ -35,17 +36,17 @@ export default function NavbarMovile({ toggleMenu, open }: Props) {
         >
           <div className="p-4 space-y-3">
             {navbar.map((section) => (
-              <li key={section.id}>
-                <button className="w-full flex justify-center p-3 rounded-lg
+              <Link href={section.tipo} key={section.id}>
+                <button className="w-full flex justify-center p-3 rounded-lg mb-2
                         border border-white/30 hover:border-white
                         hover:bg-white/10
                         transition-all duration-200
                         text-white select-none cursor-pointer
                       "
                 >
-                  {section.section}
+                  <p className="cursor-pointer text-center">{section.section}</p>
                 </button>
-              </li>
+              </Link>
             ))}
           </div>
         </ul>

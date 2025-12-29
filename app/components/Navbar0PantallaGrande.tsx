@@ -1,14 +1,15 @@
-
+import Link from 'next/link'
 interface TypeProps{
     section:string
+    tipo:string
     id: number;
 }
 export const navbar: TypeProps[]= [
-        { id:1 ,section: "Quienes Somos" },
-        { id:2, section: "Categorías" }, 
-        { id:3, section: "Galeria" },
-        { id:4, section: "Busqueda de jugadores" },
-        { id:5, section:"Contactanos" }
+    { id: 1, section: "Quienes Somos", tipo:"/quienes-somos" },
+    { id: 2, section: "Categorías", tipo: "categorias" }, 
+    { id: 3, section: "Galeria", tipo: "galeria" },
+    { id: 4, section: "Busqueda de jugadores", tipo: "busqueda-de-jugadores" },
+    { id: 5, section: "Contactanos", tipo: "contacto" }
     ]
 
 export default function Navbar0PantallaGrande() {
@@ -18,7 +19,7 @@ export default function Navbar0PantallaGrande() {
 
 
         {navbar.map((section)=>(
-            <li
+            <Link href={section.tipo}
                 key={section.id}
                 className="flex justify-center  p-3 rounded-lg
              border border-white/30 hover:border-white
@@ -27,10 +28,10 @@ export default function Navbar0PantallaGrande() {
              text-white cursor-pointer "
             >
 
-                <p className="cursor-pointer text-center">
-                    {section.section}
-                </p>
-            </li>
+               
+                <p className="cursor-pointer text-center">{section.section}</p>
+              
+            </Link>
         ))}
     </ul>
   );
