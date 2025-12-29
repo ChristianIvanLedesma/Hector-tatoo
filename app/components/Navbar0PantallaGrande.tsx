@@ -14,20 +14,20 @@ export const navbar: TypeProps[]= [
 export default function Navbar0PantallaGrande() {
 
   return (
-      <ul className="hidden sm:flex sm:w-180 m-auto flex-row items-center justify-center gap-4 p-2">
+      <ul className="hidden sm:flex sm:w-160 md:w-180 m-auto flex-row items-center justify-center gap-4 p-2">
 
 
         {navbar.map((section)=>(
             <li
                 key={section.id}
-                className="flex justify-center p-3 rounded-lg
+                className="flex justify-center  p-3 rounded-lg
              border border-white/30 hover:border-white
              hover:bg-white/10 backdrop-blur
              transition-all duration-300
              text-white cursor-pointer "
             >
 
-                <p className="cursor-pointer">
+                <p className="cursor-pointer text-center">
                     {section.section}
                 </p>
             </li>

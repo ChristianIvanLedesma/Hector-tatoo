@@ -12,8 +12,8 @@ export default function Layout({ children }: { children: ReactNode }) {
 
       </head>
       <body >
-        <div className="flex items-center justify-center gap-3 m-auto py-8">
-                <h1 className="text-center text-gray-500 text-shadow-gray-700 text-5xl animate-pulse">
+        <div className="flex items-center justify-between gap-3 m-auto p-8 sm:w-138">
+                <h1 className="text-3xl sm:text-center text-gray-500 text-shadow-gray-700 sm:text-5xl animate-pulse">
                   HECTOR TATOO
                 </h1>
                
