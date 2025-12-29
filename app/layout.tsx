@@ -19,7 +19,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                
         
                 <Image
-                  src="/asd.png"
+                  src="/logo.png"
                   alt="Logo"
                   width={90}
                   height={60}
