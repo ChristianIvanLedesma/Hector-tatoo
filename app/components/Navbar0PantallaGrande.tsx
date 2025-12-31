@@ -8,7 +8,7 @@ export const navbar: TypeProps[]= [
     { id: 1, section: "Quienes Somos", tipo:"/quienes-somos" },
     { id: 2, section: "Categorías", tipo: "categorias" }, 
     { id: 3, section: "Galeria", tipo: "galeria" },
-    { id: 4, section: "Busqueda de jugadores", tipo: "busqueda-de-jugadores" },
+    { id: 4, section: "Publicaciones", tipo: "avisos" },
     { id: 5, section: "Contactanos", tipo: "contacto" }
     ]
 
