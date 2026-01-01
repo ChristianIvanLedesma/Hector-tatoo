@@ -10,11 +10,32 @@ interface PropsMisAvisos{
 export default function BusquedaDeJugadores() {
     const[misAvisos,setMisAvisos]=useState<PropsMisAvisos[]>([]);
 
-    const obtenerAvisos=async()=>{
-        const res= await fetch("/api/avisos");
-        const data=await res.json();
-        setMisAvisos(data);
-    }
+
+
+    const obtenerAvisos = async () => {
+
+        try {
+            const res = await fetch("/api/avisos");
+            if (!res.ok) {
+                setMisAvisos([]);
+                return;
+            }
+            const data = await res.json();
+
+            if (Array.isArray(data)) {
+                setMisAvisos(data);
+            } else {
+                console.error("La API no devolvió un array:", data);
+                setMisAvisos([]);
+            }
+
+        } catch (error: unknown) {
+            console.error("Error al obtener avisos:", error);
+            setMisAvisos([]);
+        }
+    };
+
+
 
     useEffect(()=>{
         obtenerAvisos();
