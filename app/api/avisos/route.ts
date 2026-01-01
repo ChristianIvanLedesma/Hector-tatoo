@@ -33,16 +33,18 @@ export async function POST(req:Request){
 
 
 export async function GET() {
-    try{
-        const aviso= await prisma.busquedaDeJugador.findMany({
-            orderBy:{
-                createdAt:"desc"
-            }
-        })
-        return NextResponse.json(aviso,{status:200})
-    } catch (error: unknown) {
-        console.log(error,"error")
-        return NextResponse.json({ error: "Error al crear la búsqueda" }, { status: 500 });
+    try {
+        const aviso = await prisma.busquedaDeJugador.findMany({
+            orderBy: {
+                createdAt: "desc",
+            },
+        });
 
+        return NextResponse.json(aviso, { status: 200 });
+
+    } catch (error: unknown) {
+        console.error("GET /api/avisos error:", error);
+
+        return NextResponse.json([], { status: 200 });
     }
-} 
+}
