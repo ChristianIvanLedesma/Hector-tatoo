@@ -41,7 +41,7 @@ export async function GET() {
         })
         return NextResponse.json(aviso,{status:200})
     } catch (error: unknown) {
-        
+        console.log(error,"error")
         return NextResponse.json({ error: "Error al crear la búsqueda" }, { status: 500 });
 
     }
