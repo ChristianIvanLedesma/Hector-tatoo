@@ -1,5 +1,6 @@
 "use client"
 import {FormEvent,useState } from "react";
+import {toast} from "react-toastify"
 
 export default function SubirAviso() {
     const [publicarAviso,setPublicarAviso]=useState({titulo:"",aviso:""})
@@ -8,7 +9,8 @@ export default function SubirAviso() {
         e.preventDefault();
         try{
             if(!publicarAviso.titulo || !publicarAviso.aviso){
-                alert("Debe completar todos los campos...")
+                toast.error("Debe completar todos los campos");
+                return
             }
 
             const res = await fetch("/api/avisos",{
@@ -19,20 +21,22 @@ export default function SubirAviso() {
                 
             })
             if (!res.ok) {
-                throw new Error("Error al publicar el aviso");
+                toast.error("Error al publicar el aviso");
+                return
             }
 
-            alert("Aviso publicado correctamente");
+            toast.success("Aviso publicado correctamente");
 
             
             setPublicarAviso({ titulo: "", aviso: "" });
 
-        }catch{
-
-        }
-
+        }catch (error: unknown) {
+                console.error("Error al subir aviso:", error);
+                toast.error("Ocurrió un error inesperado al publicar el aviso");
+            }
     }
 
+    
 
   return (
    <form 

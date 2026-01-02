@@ -1,5 +1,6 @@
 "use client"
 import { useState,useEffect } from "react";
+import {toast} from "react-toastify"
 
 interface PropsMisAvisos{
     id:number;
@@ -21,16 +22,11 @@ export default function BusquedaDeJugadores() {
                 return;
             }
             const data = await res.json();
-
-            if (Array.isArray(data)) {
-                setMisAvisos(data);
-            } else {
-                console.error("La API no devolvió un array:", data);
-                setMisAvisos([]);
-            }
+            setMisAvisos(data)
 
         } catch (error: unknown) {
-            console.error("Error al obtener avisos:", error);
+            console.log("Error al obtener avisos:", error);
+            toast.error("Error al obtener avisos")
             setMisAvisos([]);
         }
     };
@@ -56,12 +52,12 @@ export default function BusquedaDeJugadores() {
       "
                 >
                    
-                    <p className="text-yellow-400 text-lg font-bold mb-2 text-center">
+                    <p className="whitespace-normal wrap-break-word text-yellow-400 text-lg font-bold mb-2 text-center">
                         {avisosPublicados.titulo}
                     </p>
 
                     
-                    <p className="text-white/90 text-sm md:text-base mb-6">
+                    <p className="whitespace-normal wrap-break-word text-white/90 text-sm md:text-base mb-6">
                         {avisosPublicados.aviso}
                     </p>
 

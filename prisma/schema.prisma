@@ -21,3 +21,15 @@ model busquedaDeJugador {
   aviso     String
   createdAt DateTime @default(now())
 }
+
+
+model contacto{
+  id        Int     @id @default(autoincrement())
+  nombre    String
+  apellido  String
+  correo    String
+  telefono  String
+  mensaje   String
+  createAt  DateTime @default(now())
+
+}

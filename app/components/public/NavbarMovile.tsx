@@ -1,4 +1,4 @@
-import { navbar } from "./Navbar0PantallaGrande";
+import { navbar } from './Navbar0PantallaGrande';
 import { Menu, X } from "lucide-react";
 import Link from 'next/link'
 
