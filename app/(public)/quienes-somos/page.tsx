@@ -1,7 +1,7 @@
 export default function QuienesSomos() {
     return (
         <section className="max-w-5xl mx-auto px-4 py-16">
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-8 shadow-lg">
+            <div className="bg-white/10 backdrop-blur-md  rounded-lg p-8 shadow-lg">
 
                 <h1 className="text-white text-3xl sm:text-4xl font-bold text-center mb-6">
                     ⚽ Club Deportivo Héctor Tatoo
