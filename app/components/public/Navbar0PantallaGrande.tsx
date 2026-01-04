@@ -10,7 +10,7 @@ interface TypeProps {
 }
 
 export const navbar: TypeProps[] = [
-    { id: 1, section: "Quienes Somos", tipo: "/quienes-somos" },
+    { id: 1, section: "Quiénes Somos", tipo: "/quienes-somos" },
     { id: 2, section: "Categorías", tipo: "/categorias" },
     { id: 3, section: "Galería", tipo: "/galeria" },
     { id: 4, section: "Publicaciones", tipo: "/avisos" },

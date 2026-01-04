@@ -1,6 +1,7 @@
 "use client"
 import { useState,useEffect } from "react";
 import {toast} from "react-toastify"
+import SkeletonAvisos from "@/app/components/public/ui/SkeletonAvisos";
 
 interface PropsMisAvisos{
     id:number;
@@ -10,6 +11,7 @@ interface PropsMisAvisos{
 }
 export default function BusquedaDeJugadores() {
     const[misAvisos,setMisAvisos]=useState<PropsMisAvisos[]>([]);
+    const[loading,setLoading]=useState(true)
 
 
 
@@ -28,6 +30,8 @@ export default function BusquedaDeJugadores() {
             console.log("Error al obtener avisos:", error);
             toast.error("Error al obtener avisos")
             setMisAvisos([]);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -35,7 +39,14 @@ export default function BusquedaDeJugadores() {
 
     useEffect(()=>{
         obtenerAvisos();
-    },[])
+    },[]);
+
+    if (loading) {
+            return (
+                <SkeletonAvisos />
+            );
+        }
+
 
     return (
         <ul className="w-full grid grid-cols-1 sm:grid-cols-2 gap-6 px-8 py-6">
