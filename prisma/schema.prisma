@@ -39,5 +39,16 @@ model publicarImagenes{
   titulo        String
   imagen        String
   description   String?
+  likes likeAnon[]
   createdAt DateTime @default(now())
+}
+
+
+
+model likeAnon {
+  id        Int    @id @default(autoincrement())
+  imagenId Int
+  anonId   String
+  imagen   publicarImagenes @relation(fields: [imagenId], references: [id], onDelete: Cascade)
+  @@unique([imagenId, anonId])
 }

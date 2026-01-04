@@ -1,11 +1,15 @@
 import { PropsImg } from "@/app/(public)/galeria/page";
 import Image from "next/image";
 
+
 interface ImaPublicadas {
     imaPublicadas: PropsImg[];
+    toggleLike: (imagenId: number)=>void
 }
 
-export default function CardImgPublicadas({ imaPublicadas }: ImaPublicadas) {
+export default function CardImgPublicadas({ imaPublicadas, toggleLike }: ImaPublicadas) {
+   
+
     return (
         <ul
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl my-10  px-10 "
@@ -48,6 +52,14 @@ export default function CardImgPublicadas({ imaPublicadas }: ImaPublicadas) {
                             <span className="text-xs text-gray-400">
                                 {fechaFormateada}
                             </span>
+                            <button
+                                onClick={() => toggleLike(imagenes.id)}
+                                className={`flex items-center gap-2 text-sm mt-2 transition
+                  ${imagenes.likedByMe ? "text-red-500" : "text-white/60 hover:text-red-400"}
+                `}
+                            >
+                                ❤️ {imagenes.likesCount}
+                            </button>
                         </div>
                     </li>
                 );
