@@ -33,3 +33,11 @@ model contacto{
   createAt  DateTime @default(now())
 
 }
+
+model publicarImagenes{
+  id            Int     @id @default(autoincrement())
+  titulo        String
+  imagen        String
+  description   String?
+  createdAt DateTime @default(now())
+}

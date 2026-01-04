@@ -39,6 +39,8 @@ export default function SubirAviso() {
     
 
   return (
+<>
+    <h1 className="text-3xl text-center text-white my-9">Publicar Avisos</h1>
    <form 
     onSubmit={subirAviso}
     className="
@@ -56,7 +58,7 @@ export default function SubirAviso() {
   "
    
    >
-        <h1 className="text-center text-white my-5">Busqueda de Jugadores y avisos</h1>
+        
           <label className="flex flex-col gap-1 text-white text-sm sm:text-base">
             titulo
             <input 
@@ -119,5 +121,6 @@ export default function SubirAviso() {
 
 
    </form>
+</>
   );
 }
