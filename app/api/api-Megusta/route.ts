@@ -1,26 +1,41 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-const prisma= new PrismaClient();
 
+const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
-    const { imagenId, anonId } = await req.json();
+    try {
+        const { imagenId, anonId } = await req.json();
+        if (!imagenId || !anonId) {
+            return NextResponse.json({ message: "Datos incompletos" },{ status: 400 });
+        }
 
-    const existe = await prisma.likeAnon.findUnique({
-        where: { imagenId_anonId: { imagenId, anonId } },
-    });
+        let liked = false;
 
-    if (existe) {
-        await prisma.likeAnon.delete({ where: { id: existe.id } });
-    } else {
-        await prisma.likeAnon.create({
-            data: { imagenId, anonId },
+        const existe = await prisma.likeAnon.findUnique({
+            where: {
+                imagenId_anonId: { imagenId, anonId },
+            },
         });
+
+        if (existe) { await prisma.likeAnon.delete({
+                where: { id: existe.id },
+            });
+            liked = false;
+        } else {
+            await prisma.likeAnon.create({
+                data: { imagenId, anonId },
+            });
+            liked = true;
+        }
+
+        const likesCount = await prisma.likeAnon.count({
+            where: { imagenId },
+        });
+
+        return NextResponse.json({liked,likesCount,});
+    } catch (error:unknown) {
+        
+        return NextResponse.json({ message: "Error al procesar el like" },{ status: 500 });
     }
-
-    const totalLikes = await prisma.likeAnon.count({
-        where: { imagenId },
-    });
-
-    return NextResponse.json({ totalLikes });
 }

@@ -1,13 +1,18 @@
 import { PropsImg } from "@/app/(public)/galeria/page";
 import Image from "next/image";
+import { ThumbsUp } from 'lucide-react';
+import { Dispatch, SetStateAction } from "react";
+
 
 
 interface ImaPublicadas {
     imaPublicadas: PropsImg[];
     toggleLike: (imagenId: number)=>void
+    setAnimateId:Dispatch<SetStateAction<number |null>>
+    animateId: number | null
 }
 
-export default function CardImgPublicadas({ imaPublicadas, toggleLike }: ImaPublicadas) {
+export default function CardImgPublicadas({ imaPublicadas, toggleLike, setAnimateId, animateId }: ImaPublicadas) {
    
 
     return (
@@ -53,12 +58,35 @@ export default function CardImgPublicadas({ imaPublicadas, toggleLike }: ImaPubl
                                 {fechaFormateada}
                             </span>
                             <button
-                                onClick={() => toggleLike(imagenes.id)}
-                                className={`flex items-center gap-2 text-sm mt-2 transition
-                  ${imagenes.likedByMe ? "text-red-500" : "text-white/60 hover:text-red-400"}
+                                onClick={() => {
+                                    if (!imagenes.likedByMe) {
+                                        setAnimateId(imagenes.id);
+                                    }
+                                    toggleLike(imagenes.id);
+                                }}
+                                className={` flex items-center gap-2 text-sm mt-2 select-none
+                  transition-colors duration-200
+                  ${imagenes.likedByMe
+                                        ? "text-blue-500"
+                                        : "text-white/60 hover:text-blue-400"
+                                    }
                 `}
                             >
-                                ❤️ {imagenes.likesCount}
+                                <span
+                                    className={`inline-flex transition-transform duration-300
+                    ${animateId === imagenes.id
+                                            ? "scale-125"
+                                            : "scale-100"
+                                        }
+                  `}
+                                    onTransitionEnd={() => setAnimateId(null)}
+                                >
+                                    <ThumbsUp className="w-5"/>
+                                </span>
+
+                                <span className="font-medium">
+                                    {imagenes.likesCount}
+                                </span>
                             </button>
                         </div>
                     </li>
