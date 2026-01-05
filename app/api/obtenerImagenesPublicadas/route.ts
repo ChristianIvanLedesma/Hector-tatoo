@@ -20,7 +20,7 @@ export async function GET(req: Request) {
             description: img.description,
             createdAt: img.createdAt,
             likesCount: img.likes.length,
-            likedByMe: img.likes.some((like) => like.anonId === anonId),
+            likedByMe:anonId !== "" && img.likes.some((like) => like.anonId === anonId),
         }));
 
         return NextResponse.json(response, { status: 200 });

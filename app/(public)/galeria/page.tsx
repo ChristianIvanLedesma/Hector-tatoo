@@ -19,6 +19,7 @@ likedByMe: boolean;
 export default function Galeria() {
     const [imaPublicadas, setImaPublicadas] = useState<PropsImg[]>([]);
     const [loading, setLoading] = useState(true);
+    const [animateId, setAnimateId] = useState<number | null>(null);
     const anonId = getAnonId();
 
     const obtenerImagenes=async()=>{
@@ -45,34 +46,15 @@ export default function Galeria() {
 
     //megusta
     const toggleLike = async (imagenId: number) => {
-        let optimisticLiked = false;
-
-        setImaPublicadas((prev) =>
-            prev.map((img) => {
-                if (img.id === imagenId) {
-                    optimisticLiked = !img.likedByMe;
-                    return {
-                        ...img,
-                        likedByMe: optimisticLiked,
-                        likesCount: img.likedByMe
-                            ? img.likesCount - 1
-                            : img.likesCount + 1,
-                    };
-                }
-                return img;
-            })
-        );
-
         try {
-            const res = await fetch("/api/api-Megusta", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ imagenId, anonId }),
-            });
+                const res = await fetch("/api/api-Megusta", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ imagenId, anonId }),
+                });
 
-            const data = await res.json();
+                const data = await res.json();
 
-            if (data.liked !== optimisticLiked) {
                 setImaPublicadas((prev) =>
                     prev.map((img) =>
                         img.id === imagenId
@@ -84,23 +66,16 @@ export default function Galeria() {
                             : img
                     )
                 );
+            } catch (error) {
+                toast.error("Error al actualizar el like");
             }
-        } catch (error) {
-            toast.error("Error al actualizar el like");
-        }
-    };
-
-    
-           
-
+        };
 
     if (loading) {
-        return (
-            <SkeletonGaleria />
-        );
+        return ( <SkeletonGaleria /> )
     }
     return (
        
-        <CardImgPublicadas imaPublicadas={imaPublicadas} toggleLike={toggleLike} />
+        <CardImgPublicadas imaPublicadas={imaPublicadas} toggleLike={toggleLike} animateId={animateId} setAnimateId={setAnimateId}/>
     );
 }
