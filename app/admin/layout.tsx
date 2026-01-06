@@ -1,17 +1,11 @@
-import NavbarAdmin from "../components/admin/navbar";
+"use client";
+
+import { SessionProvider } from "next-auth/react";
+
 export default function AdminLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
-    return (
-        <>
-            
-            <main className="min-h-screen">
-                <NavbarAdmin />
-                {children}
-            </main>
-        </>
-        
-    );
+    return <SessionProvider>{children}</SessionProvider>;
 }

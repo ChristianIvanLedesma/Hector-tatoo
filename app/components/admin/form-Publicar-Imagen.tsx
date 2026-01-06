@@ -1,4 +1,4 @@
-import { PropsImagenes } from "@/app/admin/publicar-imagen/page";
+import { PropsImagenes } from "@/app/admin/(protected)/publicar-imagen/page";
 import { Dispatch, FormEvent, SetStateAction } from "react";
 
 
