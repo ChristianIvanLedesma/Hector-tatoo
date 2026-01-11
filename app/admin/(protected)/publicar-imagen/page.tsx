@@ -25,7 +25,7 @@ export interface PropsImg {
 export default function PublicarImagen() {
     const [datos, setDatos] = useState<PropsImagenes>({ titulo: "", imagen: null,description: "",});
     const [imaPublicadas, setImaPublicadas] = useState<PropsImg[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
     const [imgSeleccionada, setImgSeleccionada] = useState<PropsImg | null>(null);
     const anonId = getAnonId();
@@ -39,8 +39,10 @@ export default function PublicarImagen() {
             toast.error("Título e imagen son obligatorios");
             return;
         }
+        setLoading(true);
 
         try {
+            
             const formData = new FormData();
             formData.append("titulo", datos.titulo);
             formData.append("imagen", datos.imagen);
@@ -59,7 +61,7 @@ export default function PublicarImagen() {
             if (!res.ok) {
                 throw new Error(data.message || "Error al publicar imagen");
             }
-
+            setLoading(false)
             toast.success("Imagen publicada correctamente");
             setDatos({ titulo: "", imagen: null, description: "" });
 
@@ -73,6 +75,7 @@ export default function PublicarImagen() {
 
     const obtenerImagenes=async()=>{
             try{
+                
                 const res = await fetch("/api/obtenerImagenesPublicadas",{
                     headers: {
                         "x-anon-id": anonId,
@@ -84,9 +87,7 @@ export default function PublicarImagen() {
                 console.log("Error al obtener las Imagenes Publicadas")
                 toast.error("Error al descargar las imagenes")
     
-            } finally {
-                setLoading(false);
-            }
+            } 
         }
     
         useEffect(()=>{
@@ -139,6 +140,7 @@ export default function PublicarImagen() {
                 datos={datos}
                 setDatos={setDatos}
                 submit={submit}
+                loading={loading}
             />
             <CardAdminImgPublicadas
                 imaPublicadas={imaPublicadas}
