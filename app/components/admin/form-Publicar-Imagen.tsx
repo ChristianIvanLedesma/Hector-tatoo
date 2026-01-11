@@ -6,10 +6,11 @@ interface PropsPublicarFotos{
     datos:PropsImagenes
     setDatos: Dispatch<SetStateAction<PropsImagenes>>
     submit: (e:FormEvent)=> void
+    loading:boolean
 
 }
 
-export default function FormularioPublicarImagen({ datos, setDatos, submit }:PropsPublicarFotos) {
+export default function FormularioPublicarImagen({ datos, setDatos, submit, loading }:PropsPublicarFotos) {
   return (
       <section className="w-full max-w-[95%] sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto pb-16 px-4">
           <h1 className="text-2xl sm:text-3xl text-center text-white my-8 font-semibold">Publicar Imágenes</h1>
@@ -60,9 +61,15 @@ export default function FormularioPublicarImagen({ datos, setDatos, submit }:Pro
 
               <button
                   type="submit"
-                  className="mt-4 rounded-lg bg-white/90 text-black py-2 cursor-pointer font-semibold hover:bg-white transition active:scale-95"
+                  disabled={loading}
+                  className={`mt-4 rounded-lg py-2 font-semibold transition active:scale-95
+                    ${loading
+                          ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                          : "bg-white/90 text-black hover:bg-white cursor-pointer"
+                      }`}
               >
-                  Publicar imagen
+              
+                  { loading ? "Publicando...": "Publicar"}
               </button>
           </form>
       </section>
