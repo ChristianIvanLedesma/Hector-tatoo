@@ -1,14 +1,13 @@
 import { PrismaClient } from "@prisma/client";
-import { NextResponse } from "next/server";
 
-const prisma = new PrismaClient();
+import { NextResponse } from "next/server";
+const prisma= new PrismaClient();
+export const dynamic = "force-dynamic";
 
 export async function GET() {
     try {
         const sponsors = await prisma.sponsor.findMany({
-            orderBy: {
-                id: "asc",
-            },
+            orderBy: { id: "asc" },
             select: {
                 id: true,
                 empresa: true,
@@ -16,8 +15,7 @@ export async function GET() {
             },
         });
 
-        return NextResponse.json(sponsors, { status: 200 });
-
+        return NextResponse.json(sponsors);
     } catch (error) {
         console.error("Error al obtener sponsors:", error);
         return NextResponse.json(
