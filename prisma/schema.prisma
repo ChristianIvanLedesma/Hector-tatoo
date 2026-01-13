@@ -52,3 +52,9 @@ model likeAnon {
   imagen   publicarImagenes @relation(fields: [imagenId], references: [id], onDelete: Cascade)
   @@unique([imagenId, anonId])
 }
+
+model sponsor{
+  id          Int @id @default(autoincrement())
+  imagen      String
+  empresa     String
+}
