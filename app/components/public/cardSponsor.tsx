@@ -2,12 +2,7 @@
 import { useState,useEffect } from "react";
 import Image from "next/image";
 
-const sponsors = [
-    "/images(1).png",
-    "/images3.png",
-    "/images2.png",
-    "/asd.png",
-];
+
 interface TypeSponsor{
   id:number;
   imagen:string;
@@ -39,9 +34,9 @@ export default function Sponsor() {
         <section className="sponsor-wrapper"> 
           <div className="sponsor-container"> 
             <div className="sponsor-track"> 
-              {[...sponsors, ...sponsors].map((src, i) => (
+              {[...sponsor,...sponsor].map((a, i) => (
                 <div className="sponsor-item" key={i}> 
-                <Image src={src} alt="sponsor" width={60} height={60} /> </div>))} 
+                <Image src={a.imagen} alt="sponsor" width={60} height={60} /> </div>))} 
             </div> 
           </div> 
           <style jsx>{`
