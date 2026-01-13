@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { LogOut } from 'lucide-react'
-import { ExternalLink } from "lucide-react";
+import { House } from "lucide-react";
 
 interface TypeProps {
     section: string;
@@ -41,7 +41,7 @@ export default function NavbarAdmin() {
                         href="/"
                         className="flex items-center gap-2 text-green-500 hover:text-white transition"
                     >
-                        <ExternalLink size={20} />
+                        <House size={20} />
                         <span className="hidden sm:inline text-sm">Ver sitio</span>
                     </Link>
 
